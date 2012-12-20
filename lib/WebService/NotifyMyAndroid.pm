@@ -15,7 +15,7 @@ use version; our $VERSION = qv('v0.0.3');
 # Module implementation here
 
 # constants
-Readonly my $NMA_URL        => 'https://nma.usk.bz/publicapi/'; 
+Readonly my $NMA_URL        => 'https://www.notifymyandroid.com/publicapi/';
 
 # string lengths in characters
 Readonly my $KEYLENGTH      => 48;
