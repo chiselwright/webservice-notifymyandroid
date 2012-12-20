@@ -10,6 +10,7 @@ my $builder = Module::Build->new(
     dist_version_from   => 'lib/WebService/NotifyMyAndroid.pm',
     requires => {
         'Carp'                  => 0,
+        'LWP::Protocol::https'  => 0,
         'Params::Validate'      => 0,
         'Readonly'              => 0,
         'Regexp::Common'        => 0,
