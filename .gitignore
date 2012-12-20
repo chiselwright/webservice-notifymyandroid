@@ -1,1 +1,6 @@
 ignore.txt
+_build
+Build
+Makefile
+MYMETA\.*
+*\.sw?
