@@ -2,5 +2,10 @@ ignore.txt
 _build
 Build
 Makefile
+META\.*
 MYMETA\.*
 *\.sw?
+Makefile.PL
+MANIFEST.bak
+blib/
+WebService-NotifyMyAndroid-v*
