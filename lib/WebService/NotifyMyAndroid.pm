@@ -224,6 +224,9 @@ L<WebService::Prowl>
 
 Steve Huff  C<< <shuff@cpan.org> >>
 
+=head1 CONTRIBUTORS
+
+Chisel Wright << <chisel@chizography.net> >>
 
 =head1 LICENCE AND COPYRIGHT
 
