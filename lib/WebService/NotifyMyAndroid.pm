@@ -152,17 +152,17 @@ This document describes WebService::NotifyMyAndroid version 0.0.3.
   
 =head1 DESCRIPTION
 
-C<WebService::NotifyMyAndroid> is a Perl interface to the Notify My Android (https://nma.usk.bz/) web API.  One or more NMA API keys are necessary in order to use this module.
+C<WebService::NotifyMyAndroid> is a Perl interface to the Notify My Android (http://www.notifymyandroid.com/) web API.  One or more NMA API keys are necessary in order to use this module.
 
 =head1 INTERFACE 
 
 =head2 verify(%params)
 
-Documentation located at L<https://nma.usk.bz/api.php>.
+Documentation located at L<http://www.notifymyandroid.com/api.jsp>.
 
 =head2 notify(%params)
 
-Documentation located at L<https://nma.usk.bz/api.php>.
+Documentation located at L<http://www.notifymyandroid.com/api.jsp>.
 
 
 =head1 DIAGNOSTICS
