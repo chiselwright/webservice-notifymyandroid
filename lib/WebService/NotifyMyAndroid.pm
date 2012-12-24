@@ -10,7 +10,7 @@ use Params::Validate qw( :all );
 use Readonly;
 use Regexp::Common qw( number );
 
-use version; our $VERSION = qv('v0.0.3');
+use version; our $VERSION = qv('v0.0.4');
 
 # Module implementation here
 

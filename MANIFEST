@@ -1,18 +1,16 @@
 Build.PL
 Changes
 lib/WebService/NotifyMyAndroid.pm
-Makefile
-Makefile.PL
-MANIFEST
-META.json
-META.yml
+MANIFEST			This list of files
 README
 README.cpan
 script/notify-my-android
-SIGNATURE
 t/00.load.t
 t/01.verify.t
 t/02.notify.t
 t/perlcritic.t
 t/pod-coverage.t
 t/pod.t
+Makefile.PL
+META.yml
+META.json
