@@ -21,6 +21,7 @@ my $builder = Module::Build->new(
         'version'               => 0,
     },
     configure_requires => {
+        'Module::Build'         => 0.40,
         'Test::More'            => 0,
         'Test::Perl::Critic'    => 0,
         'Test::Pod'             => 1.14,
