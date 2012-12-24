@@ -9,3 +9,6 @@ Makefile.PL
 MANIFEST.bak
 blib/
 WebService-NotifyMyAndroid-v*
+/WebService-NotifyMyAndroid*tar.gz
+/WebService-NotifyMyAndroid*/
+/.build/

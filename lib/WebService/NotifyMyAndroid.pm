@@ -1,7 +1,7 @@
 package WebService::NotifyMyAndroid;
-use base qw( WebService::Simple );
-use warnings;
 use strict;
+use warnings;
+use base qw( WebService::Simple );
 
 binmode STDOUT, ":encoding(UTF-8)";
 
@@ -9,8 +9,6 @@ use Carp;
 use Params::Validate qw( :all );
 use Readonly;
 use Regexp::Common qw( number );
-
-use version; our $VERSION = qv('v0.0.4');
 
 # Module implementation here
 
@@ -117,17 +115,8 @@ sub _valid_API_key {
 }
 
 1; # Magic true value required at end of module
+# ABSTRACT: Perl interface to Notify My Android web API
 __END__
-
-=head1 NAME
-
-WebService::NotifyMyAndroid - Perl interface to Notify My Android web API
-
-
-=head1 VERSION
-
-This document describes WebService::NotifyMyAndroid version 0.0.3.
-
 
 =head1 SYNOPSIS
 
@@ -218,23 +207,6 @@ L<http://rt.cpan.org>.
 =head1 SEE ALSO
 
 L<WebService::Prowl>
-
-
-=head1 AUTHOR
-
-Steve Huff  C<< <shuff@cpan.org> >>
-
-=head1 CONTRIBUTORS
-
-Chisel Wright C<< <chisel@chizography.net> >>
-
-=head1 LICENCE AND COPYRIGHT
-
-Copyright (c) 2011, Steve Huff C<< <shuff@cpan.org> >>. All rights reserved.
-
-This module is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself. See L<perlartistic>.
-
 
 =head1 DISCLAIMER OF WARRANTY
 
