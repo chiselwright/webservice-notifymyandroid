@@ -3,7 +3,7 @@ use base qw( WebService::Simple );
 use warnings;
 use strict;
 
-binmode STDOUT, ":utf8";
+binmode STDOUT, ":encoding(UTF-8)";
 
 use Carp;
 use Params::Validate qw( :all );
