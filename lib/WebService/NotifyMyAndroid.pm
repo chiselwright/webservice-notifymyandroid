@@ -1,6 +1,7 @@
+# http://blogs.perl.org/users/sawyer_x/2010/08/distzilla-strictures-tip.html
+use strictures 1;
+
 package WebService::NotifyMyAndroid;
-use strict;
-use warnings;
 use base qw( WebService::Simple );
 
 binmode STDOUT, ":encoding(UTF-8)";
@@ -22,7 +23,12 @@ Readonly my $EVENTLENGTH    => 1000;
 Readonly my $DESCLENGTH     => 10000;
 
 # validation regexes
-Readonly my $KEYREGEX       => $RE{num}{int}{-base => 16}{-places => $KEYLENGTH};
+## we're using the 'weird' format for setting flags because strictures
+## complains about 'use of multidimensional array emulation' with the
+## "{-base => 16}" syntax
+##  for more information read the documentation for strictures,
+##  multidimensional and Regexp::Common (Flag syntax)
+Readonly my $KEYREGEX       => $RE{num}{int}{"-base$;16"}{"-places$;$KEYLENGTH"};
 Readonly my $APPREGEX       => ".{1,$APPLENGTH}";
 Readonly my $EVENTREGEX     => ".{1,$EVENTLENGTH}";
 Readonly my $DESCREGEX      => ".{1,$DESCLENGTH}";

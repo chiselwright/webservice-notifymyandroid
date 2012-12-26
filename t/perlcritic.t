@@ -6,4 +6,7 @@ if (!require Test::Perl::Critic) {
     );
 }
 
+my $rcfile = File::Spec->catfile( 't', 'perlcriticrc' );
+Test::Perl::Critic->import( -profile => $rcfile );
+
 Test::Perl::Critic::all_critic_ok();
