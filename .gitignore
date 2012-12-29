@@ -1,6 +1,4 @@
 ignore.txt
-_build
-Build
 Makefile
 META\.*
 MYMETA\.*
