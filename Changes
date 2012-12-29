@@ -1,6 +1,7 @@
 Revision history for WebService-NotifyMyAndroid
 
 {{$NEXT}}
+      Fix issues with Dist::Zilla conversion
 
 0.0.5_01  2012-12-26 15:49:16 Europe/London
       Convert to Dist::Zilla
