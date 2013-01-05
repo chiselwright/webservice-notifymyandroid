@@ -11,6 +11,10 @@ use Params::Validate qw( :all );
 use Readonly;
 use Regexp::Common qw( number );
 
+# make sure we have the https protocol available to us;
+# we need this to do anything this the API url
+use LWP::Protocol::https;
+
 # Module implementation here
 
 # constants

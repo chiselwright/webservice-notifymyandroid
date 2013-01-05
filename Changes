@@ -1,6 +1,7 @@
 Revision history for WebService-NotifyMyAndroid
 
 {{$NEXT}}
+    Add explicit use of LWP::Protocol::https
 
 0.0.5_02  2012-12-29 11:06:29 Europe/London
       Fix issues with Dist::Zilla conversion
