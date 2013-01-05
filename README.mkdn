@@ -4,7 +4,7 @@ WebService::NotifyMyAndroid - Perl interface to Notify My Android web API
 
 # VERSION
 
-version 0.0.5\_02
+version 0.0.5\_03
 
 # SYNOPSIS
 
