@@ -50,76 +50,76 @@ my %verify_spec = (
     apikey => {
         type => SCALAR,
         callbacks => {
-            'valid API key' => \&_valid_API_key,
+            'valid API key' => \&_valid_api_key,
         },
     },
     developerkey => {
         optional => 1,
         type => SCALAR,
         callbacks => {
-            'valid API key' => \&_valid_API_key,
+            'valid API key' => \&_valid_api_key,
         },
     },
 );
 
 sub verify {
-    my $self = shift;
-    my %params = validate( @_, \%verify_spec );
-    $self->get( 'verify', \%params )->parse_response;
+    my ($self, @args) = @_;
+    my %params = validate( @args, \%verify_spec );
+    return $self->get( 'verify', \%params )->parse_response;
 }
 
 my %notify_spec = (
     apikey => {
         type => SCALAR | ARRAYREF,
         callbacks => {
-            'valid API key' => \&_valid_API_key,
+            'valid API key' => \&_valid_api_key,
         },
     },
     application => {
         type => SCALAR,
-        regex => qr/^$APPREGEX$/,
+        regex => qr/^$APPREGEX$/xms,
     },
     event => {
         type => SCALAR,
-        regex => qr/^$EVENTREGEX$/,
+        regex => qr/^$EVENTREGEX$/xms,
     },
     description => {
         type => SCALAR,
-        regex => qr/^$DESCREGEX$/,
+        regex => qr/^$DESCREGEX$/xms,
     },
     priority => {
         optional => 1,
         type => SCALAR,
-        regex => qr/^$PRIOREGEX$/,
+        regex => qr/^$PRIOREGEX$/xms,
         default => 0,
     },
     developerkey => {
         optional => 1,
         type => SCALAR,
         callbacks => {
-            'valid API key' => \&_valid_API_key,
+            'valid API key' => \&_valid_api_key,
         },
     },
 );
 
 sub notify {
-    my $self = shift;
-    my %params = validate( @_, \%notify_spec );
-    $self->post( 'notify', \%params )->parse_response;
+    my ($self, @args) = @_;
+    my %params = validate( @args, \%notify_spec );
+    return $self->post( 'notify', \%params )->parse_response;
 }
 
 # private functions
 
-sub _valid_API_key {
+sub _valid_api_key {
     my( $candidate, $params ) = @_;
 
     if ( ref( $candidate ) eq 'ARRAY' ) {
         foreach my $key ( @{$candidate} ) {
-            _valid_API_key( $key ) or return;
+            _valid_api_key( $key ) or return;
         }
     }
     else {
-        $candidate =~ /^$KEYREGEX$/i or return;
+        $candidate =~ /^$KEYREGEX$/ixms or return;
     }
     return( $candidate );
 }
