@@ -1,6 +1,8 @@
 Revision history for WebService-NotifyMyAndroid
 
 {{$NEXT}}
+
+0.0.5_04  2013-01-11 15:20:06 UTC
     Rework some areas to pass more strict perlcritic regime
     Add [Prereqs] for script modules used
     Drop Test::Kwalitee plugin from dist.ini
