@@ -42,14 +42,14 @@ my %verify_spec = (
     apikey => {
         type => SCALAR,
         callbacks => {
-            'valid API key' => \&_valid_API_key,
+            'valid API key' => \&_valid_api_key,
         },
     },
     developerkey => {
         optional => 1,
         type => SCALAR,
         callbacks => {
-            'valid API key' => \&_valid_API_key,
+            'valid API key' => \&_valid_api_key,
         },
     },
 );
@@ -64,7 +64,7 @@ my %notify_spec = (
     apikey => {
         type => SCALAR | ARRAYREF,
         callbacks => {
-            'valid API key' => \&_valid_API_key,
+            'valid API key' => \&_valid_api_key,
         },
     },
     application => {
@@ -89,7 +89,7 @@ my %notify_spec = (
         optional => 1,
         type => SCALAR,
         callbacks => {
-            'valid API key' => \&_valid_API_key,
+            'valid API key' => \&_valid_api_key,
         },
     },
 );
@@ -102,12 +102,12 @@ sub notify {
 
 # private functions
 
-sub _valid_API_key {
+sub _valid_api_key {
     my( $candidate, $params ) = @_;
 
     if ( ref( $candidate ) eq 'ARRAY' ) {
         foreach my $key ( @{$candidate} ) {
-            _valid_API_key( $key ) or return;
+            _valid_api_key( $key ) or return;
         }
     }
     else {
