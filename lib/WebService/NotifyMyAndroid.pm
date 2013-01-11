@@ -55,8 +55,8 @@ my %verify_spec = (
 );
 
 sub verify {
-    my $self = shift;
-    my %params = validate( @_, \%verify_spec );
+    my ($self, @args) = @_;
+    my %params = validate( @args, \%verify_spec );
     $self->get( 'verify', \%params )->parse_response;
 }
 
@@ -95,8 +95,8 @@ my %notify_spec = (
 );
 
 sub notify {
-    my $self = shift;
-    my %params = validate( @_, \%notify_spec );
+    my ($self, @args) = @_;
+    my %params = validate( @args, \%notify_spec );
     $self->post( 'notify', \%params )->parse_response;
 }
 
