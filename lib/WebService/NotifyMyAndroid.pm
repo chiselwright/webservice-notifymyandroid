@@ -69,20 +69,20 @@ my %notify_spec = (
     },
     application => {
         type => SCALAR,
-        regex => qr/^$APPREGEX$/,
+        regex => qr/^$APPREGEX$/xms,
     },
     event => {
         type => SCALAR,
-        regex => qr/^$EVENTREGEX$/,
+        regex => qr/^$EVENTREGEX$/xms,
     },
     description => {
         type => SCALAR,
-        regex => qr/^$DESCREGEX$/,
+        regex => qr/^$DESCREGEX$/xms,
     },
     priority => {
         optional => 1,
         type => SCALAR,
-        regex => qr/^$PRIOREGEX$/,
+        regex => qr/^$PRIOREGEX$/xms,
         default => 0,
     },
     developerkey => {
@@ -111,7 +111,7 @@ sub _valid_api_key {
         }
     }
     else {
-        $candidate =~ /^$KEYREGEX$/i or return;
+        $candidate =~ /^$KEYREGEX$/ixms or return;
     }
     return( $candidate );
 }
