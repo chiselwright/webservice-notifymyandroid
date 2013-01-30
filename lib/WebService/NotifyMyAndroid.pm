@@ -1,7 +1,8 @@
+# http://blogs.perl.org/users/sawyer_x/2010/08/distzilla-strictures-tip.html
+use strictures 1;
+
 package WebService::NotifyMyAndroid;
 use base qw( WebService::Simple );
-use warnings;
-use strict;
 
 binmode STDOUT, ":encoding(UTF-8)";
 
@@ -10,7 +11,9 @@ use Params::Validate qw( :all );
 use Readonly;
 use Regexp::Common qw( number );
 
-use version; our $VERSION = qv('v0.0.4');
+# make sure we have the https protocol available to us;
+# we need this to do anything this the API url
+use LWP::Protocol::https;
 
 # Module implementation here
 
@@ -24,7 +27,12 @@ Readonly my $EVENTLENGTH    => 1000;
 Readonly my $DESCLENGTH     => 10000;
 
 # validation regexes
-Readonly my $KEYREGEX       => $RE{num}{int}{-base => 16}{-places => $KEYLENGTH};
+## we're using the 'weird' format for setting flags because strictures
+## complains about 'use of multidimensional array emulation' with the
+## "{-base => 16}" syntax
+##  for more information read the documentation for strictures,
+##  multidimensional and Regexp::Common (Flag syntax)
+Readonly my $KEYREGEX       => $RE{num}{int}{"-base$;16"}{"-places$;$KEYLENGTH"};
 Readonly my $APPREGEX       => ".{1,$APPLENGTH}";
 Readonly my $EVENTREGEX     => ".{1,$EVENTLENGTH}";
 Readonly my $DESCREGEX      => ".{1,$DESCLENGTH}";
@@ -42,92 +50,83 @@ my %verify_spec = (
     apikey => {
         type => SCALAR,
         callbacks => {
-            'valid API key' => \&_valid_API_key,
+            'valid API key' => \&_valid_api_key,
         },
     },
     developerkey => {
         optional => 1,
         type => SCALAR,
         callbacks => {
-            'valid API key' => \&_valid_API_key,
+            'valid API key' => \&_valid_api_key,
         },
     },
 );
 
 sub verify {
-    my $self = shift;
-    my %params = validate( @_, \%verify_spec );
-    $self->get( 'verify', \%params )->parse_response;
+    my ($self, @args) = @_;
+    my %params = validate( @args, \%verify_spec );
+    return $self->get( 'verify', \%params )->parse_response;
 }
 
 my %notify_spec = (
     apikey => {
         type => SCALAR | ARRAYREF,
         callbacks => {
-            'valid API key' => \&_valid_API_key,
+            'valid API key' => \&_valid_api_key,
         },
     },
     application => {
         type => SCALAR,
-        regex => qr/^$APPREGEX$/,
+        regex => qr/^$APPREGEX$/xms,
     },
     event => {
         type => SCALAR,
-        regex => qr/^$EVENTREGEX$/,
+        regex => qr/^$EVENTREGEX$/xms,
     },
     description => {
         type => SCALAR,
-        regex => qr/^$DESCREGEX$/,
+        regex => qr/^$DESCREGEX$/xms,
     },
     priority => {
         optional => 1,
         type => SCALAR,
-        regex => qr/^$PRIOREGEX$/,
+        regex => qr/^$PRIOREGEX$/xms,
         default => 0,
     },
     developerkey => {
         optional => 1,
         type => SCALAR,
         callbacks => {
-            'valid API key' => \&_valid_API_key,
+            'valid API key' => \&_valid_api_key,
         },
     },
 );
 
 sub notify {
-    my $self = shift;
-    my %params = validate( @_, \%notify_spec );
-    $self->post( 'notify', \%params )->parse_response;
+    my ($self, @args) = @_;
+    my %params = validate( @args, \%notify_spec );
+    return $self->post( 'notify', \%params )->parse_response;
 }
 
 # private functions
 
-sub _valid_API_key {
+sub _valid_api_key {
     my( $candidate, $params ) = @_;
 
     if ( ref( $candidate ) eq 'ARRAY' ) {
         foreach my $key ( @{$candidate} ) {
-            _valid_API_key( $key ) or return;
+            _valid_api_key( $key ) or return;
         }
     }
     else {
-        $candidate =~ /^$KEYREGEX$/i or return;
+        $candidate =~ /^$KEYREGEX$/ixms or return;
     }
     return( $candidate );
 }
 
 1; # Magic true value required at end of module
+# ABSTRACT: Perl interface to Notify My Android web API
 __END__
-
-=head1 NAME
-
-WebService::NotifyMyAndroid - Perl interface to Notify My Android web API
-
-
-=head1 VERSION
-
-This document describes WebService::NotifyMyAndroid version 0.0.3.
-
 
 =head1 SYNOPSIS
 
@@ -218,23 +217,6 @@ L<http://rt.cpan.org>.
 =head1 SEE ALSO
 
 L<WebService::Prowl>
-
-
-=head1 AUTHOR
-
-Steve Huff  C<< <shuff@cpan.org> >>
-
-=head1 CONTRIBUTORS
-
-Chisel Wright C<< <chisel@chizography.net> >>
-
-=head1 LICENCE AND COPYRIGHT
-
-Copyright (c) 2011, Steve Huff C<< <shuff@cpan.org> >>. All rights reserved.
-
-This module is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself. See L<perlartistic>.
-
 
 =head1 DISCLAIMER OF WARRANTY
 
